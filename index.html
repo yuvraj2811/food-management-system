@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./images/fec icon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./src/output.css" />
+    <title>Food Management</title>
+  </head>
+
+  <body>
+    <!-- nav bar -->
+    <nav>
+      <div class="nav-bar">
+        <div class="nav-logo"></div>
+        <div class="nav-containt">
+          <a href="">Home</a>
+          <a href="">Category</a>
+          <a href="">Orders</a>
+          <a href="">Inventory</a>
+          <a href="">Shortage</a>
+
+          <button class="Log-in" onclick="signIn()">Log in</button>
+          <button class="sign-up" onclick="openSignUp()">Sign up</button>
+        </div>
+
+        <div class="res-nav">
+          <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+          <div class="res-containt" id="navMenu">
+              <a href="#">Home</a>
+              <a href="#">Category</a>
+              <a href="#">Orders</a>
+              <a href="#">Inventory</a>
+              <a href="#">Shortage</a>
+              <button class="Log-in">Log in</button>
+              <button class="sign-up">Sign up</button>
+        </div>
+      </div>
+     
+    </nav>
+
+    <!-- top sectioin -->
+
+    <div class="top-section">
+      <div class="search-box">
+        <input type="text " placeholder="Search Products" />
+        <button class="search-button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- middle section -->
+    <hr class="hr-middle" />
+
+    <main>
+      <div class="category-buttons">
+        <div class="category-slector">
+          <label for="category">Category📝</label>
+          <select name="" id="pageSelect" onchange="navigateToPage()">
+            <option value="">All</option>
+            <option value="http://127.0.0.1:5501/html%20files/rice.html">
+              Rice
+            </option>
+            <option value="">Spices</option>
+            <option value="">Oils</option>
+            <option value="">Dairy&Products</option>
+            <option value="">Flours</option>
+            <option value="">Dry Fruits & Nuts</option>
+            <option value="">Snacks & Instant Foods</option>
+            <option value="">Beverages</option>
+            <option value="">Fresh Vegetables & Fruits</option>
+            <option value="">Bakery & Packaged Goods</option>
+            <option value="">Cleaning Supplies</option>
+            <option value="">Pooja (Worship) Essentials</option>
+          </select>
+        </div>
+        <div class="category-add">
+          <button class="add">Add Item <i class="fa-solid fa-plus"></i></button>
+          <button class="add">
+            Delet Item <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-items">
+          Rice
+          <div
+            style="background-image: url('./images/rice\ bag\ pic.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="./html files/rice.html">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Spices
+          <div
+            style="background-image: url('./images/spices.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Oils
+          <div
+            style="background-image: url('./images/oils.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Dairy&Products
+          <div
+            style="
+              background-image: url('./images/dairy\ and\ its\ producs.jpeg');
+            "
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Flours
+          <div
+            style="background-image: url('./images/Flours.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Dry Fruits & Nuts
+          <div
+            style="background-image: url('./images/Dry\ Fruits\ &\ Nuts.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Snacks & Instant Foods
+
+          <div
+            style="background-image: url('./images/snacks.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Beverages
+          <div
+            style="background-image: url('./images/Beverages.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Fresh Vegetables & Fruits
+          <div
+            style="
+              background-image: url('./images/Fresh\ Vegetables\ &\ Fruits.jpeg');
+            "
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Bakery & Packaged Goods
+
+          <div
+            style="background-image: url('./images/Bakery.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Cleaning Supplies
+          <div
+            style="background-image: url('./images/Cleaning\ Supplies.jpeg')"
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+
+        <div class="category-items">
+          Pooja (Worship) Essentials
+          <div
+            style="
+              background-image: url('./images/Pooja\ \(Worship\)\ Essentials.jpeg');
+            "
+            class="img-height"
+          ></div>
+          <button><a href="">See All</a></button>
+        </div>
+      </div>
+    </main>
+
+    <hr class="hr-middle" />
+    <!-- footer -->
+    <footer>
+      <div class="footer">
+        <div class="about-us">
+          <div class="about-us-img"></div>
+          <div class="about-us-line">
+            <p class="center">Hola</p>
+            <p>
+              Efficient food tracking, waste reduction, and smart meal
+              management.
+            </p>
+          </div>
+        </div>
+
+        <div class="information">
+          <p>Information</p>
+          <ul>
+            <li><a href="">New Products</a></li>
+            <li><a href="">Top Selling</a></li>
+            <li><a href="">Our Blogs</a></li>
+            <li><a href="">Services</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="hr-middle" />
+      <div class="last-part">
+        <div class="contact-us">
+          <ul>
+            <li>
+              <i class="fa-solid fa-location-dot"></i>123, ABC Street, Connaught
+              Place, New Delhi - 110001, India
+            </li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="logo-footer"></div>
+      </div>
+    </footer>
+
+    <script
+      src="https://kit.fontawesome.com/3bfbd4f4a0.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

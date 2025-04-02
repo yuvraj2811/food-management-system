@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Shadows+Into+Light&display=swap');
+
+.permanent-marker-regular {
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-bar{
+    color: white;
+    background-color: #FFC72C;
+    height: 80px;    
+    display: flex;
+    justify-content: space-around;
+    border-radius: 5px;
+}
+
+.nav-logo{
+    height: 75px;
+    background-image: url("./images/nav\ logo.png");
+    background-size: cover;
+    width: 75px;
+    border-radius: 50%;
+
+    
+}
+
+.nav-logo:hover{
+    animation: flip 1s infinite linear;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.nav-containt{
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+height: 75px;
+width: 700px;
+font-size: 1.3rem;
+color: #E32636;
+}
+
+.nav-containt a:hover{
+    font-size: 1.5rem;
+    transition: .5s ease-in-out;
+    color: #AA0000;
+}
+
+.nav-bar button{
+    
+    border-radius: 10px;
+    padding: 7px;
+    border: 1.5px solid #E32636;
+    color: white;
+    background-color:#E32636;
+    padding: 3px 6px;
+}
+
+.nav-bar button:hover{
+    cursor: pointer;
+    background-color: #AA0000;
+    color: white;
+    font-size: 1.5rem;
+    transition: 0.5s ease-in-out;
+}
+
+/* top-section */
+
+.top-section{
+    height: 610px;
+    background-image: url("./images/top\ section\ bg.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.top-section:hover{
+   background-position: bottom;
+   transition: 1.3s ease-in-out;
+}
+
+.search-box{
+    margin-bottom: 150px;
+}
+
+.search-box  input{
+width: 350px;
+height: 50px;
+background-color: whitesmoke;
+border-radius: 15px 0 0 15px;
+border: none;
+outline: none;
+text-align: center;
+padding: 5px;
+font-size: 1.2rem;
+}
+
+.search-box button{
+    width: 45px;
+    height: 50px;
+    background-color: #E32636;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 0 15px 15px 0;
+    font-size: 1.2rem;
+}
+
+.search-box button:hover{
+    background-color: #AA0000;
+    transition: 0.3s ease-in-out;
+}
+
+/* middle section category button */
+
+.category-buttons{
+   padding: 10px;
+    background-color: #FEDF87;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-slector{
+    color: #E32636;
+    font-size: 1.3rem;
+}
+
+.category-slector option{
+    background-color:#FEDF87;
+}
+
+.category-add{
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.add{
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    color: white;
+    background-color: #E32636;
+    padding:10px 15px;
+    font-size: 1rem;
+}
+
+.add:hover{
+    background-color: #AA0000;
+    font-size: 1.1rem;
+    transition: 0.4s ease-in-out;
+}
+/* middle section */
+
+.category{
+    /* height: 700px; */
+    
+    background-color: #FEDF87;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.category-items{
+    height: 300px;
+    width: 300px;
+    font-size: 1.5rem;
+    text-align: center;
+    background-color: #FEDF87;
+    color:#E32636;
+    margin:15px 0;
+}
+.category-items button {
+    background-color: #E32636;
+    color: white;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 10px;
+}
+
+
+.img-height{
+    height: 240px;
+    background-size: cover;
+    border-radius: 15px;
+}
+
+.hr-middle{
+    background-color: #E32636;
+    text-align: center;
+    width: 300px;
+    margin: auto;
+    height: 3px;
+}
+
+/* footer */
+
+
+.footer{
+    background-color: #FEDF87;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.about-us{
+    height: 250px;
+    width: 650px;
+    font-size: 1.5rem;
+    color: #E32636;
+    display: flex;
+}
+
+
+.about-us-img{
+    height: 250px;
+    width: 400px;
+    background-image: url("./images/about\ us\ 1.jpeg");
+    background-size: cover;
+    border-radius: 15px;
+}
+
+.about-us-img:hover{
+    background-position: center;
+    transition: .5s ease-in-out;
+}
+
+.about-us-line{
+    height: 250px;
+    width: 250px;
+    padding-left: 10px;
+}
+
+.center{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* footer */
+
+.information{
+    font-size: 1.3rem;
+    margin-right: 50px;
+    color: #E32636;
+}
+
+.information p{
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #AA0000;
+}
+
+.information li:hover{
+    font-size: 1.5rem;
+    transition: 0.4s ease-in-out;
+    color: rgb(78, 7, 7);
+    margin-bottom: 10px;
+}
+
+/* last part */
+
+.last{
+    display: flex;
+    padding: 40px;
+    justify-content: space-between;
+    background-color: #FFC72C;
+    height: 500px;
+
+}
+
+.contact-us ul{
+    list-style: none;
+}
+.contact-us{
+    height: 400px;
+    width: 50%px;
+    color: #E32636;
+
+}
+
+
+/* Resposnivi nav bar */
+
+.res-nav{
+    display: none;
+}
+
+@media(max-width:798px){
+    .nav-containt{display: none;}
+}
+
+ @media(max-width:797px){
+    .res-nav{
+        display: block!important;
+        background-color:#FFC72C!important;
+
+    }
+    .res-containt a{
+        display: block;
+        font-size: 1.3rem;
+        color: #E32636;
+        background-color:#FFC72C;
+    }
+    .res-containt button{
+        display: block;
+        margin: 5px;
+        background-color: #FFC72C;
+    }
+    .menu-btn{
+        margin-left: 55%;
+        margin-top: 25px;
+        padding: 20px;
+        background-color: #FFC72C;
+        
+    }
+
+    .res-containt {
+        display: none; /* Initially hidden */
+        background-color: #FFC72C;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    /* Show when the 'show' class is added */
+    .res-containt.show {
+        display: block;
+    }
+} 
