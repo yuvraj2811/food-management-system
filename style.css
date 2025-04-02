@@ -217,92 +217,57 @@ font-size: 1.2rem;
     height: 3px;
 }
 
-/* footer */
-
 
 .footer{
-    background-color: #FEDF87;
-    padding: 25px 15px;
-    display: flex;
-    justify-content: space-around;
-    
-}
-
-.about-us{
-    height: 250px;
-    width: 650px;
-    font-size: 1.5rem;
-    color: #E32636;
-    display: flex;
-}
-
-
-.about-us-img{
-    height: 250px;
-    width: 400px;
-    background-image: url("./images/about\ us\ 1.jpeg");
-    background-size: cover;
-    border-radius: 15px;
-}
-
-.about-us-img:hover{
-    background-position: center;
-    transition: .5s ease-in-out;
-}
-
-.about-us-line{
-    height: 250px;
-    width: 250px;
-    padding-left: 10px;
-}
-
-.center{
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-/* footer */
-
-.information{
-    font-size: 1.3rem;
-    margin-right: 50px;
-    color: #E32636;
-}
-
-.information p{
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-    color: #AA0000;
-}
-
-.information li:hover{
-    font-size: 1.5rem;
-    transition: 0.4s ease-in-out;
-    color: rgb(78, 7, 7);
-    margin-bottom: 10px;
-}
-
-/* last part */
-
-.last{
-    display: flex;
-    padding: 40px;
-    justify-content: space-between;
-    background-color: #FFC72C;
-    height: 500px;
-
-}
-
-.contact-us ul{
-    list-style: none;
-}
-.contact-us{
+    width: 100%;
     height: 400px;
-    width: 50%px;
+    padding: 40px;
+    background-color: #FEDF87;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.img{
+    height: 300px;
+    width: 20%;
+    /* background-image: url("./images/contact\ us.jpg");
+    background-size: cover; */
+    display:flex ;
+    align-items: center;
+    font-size: 1.3rem;
+    justify-content: center;
+}
+
+.contact-us{
+    height: 300px;
+    width: 45%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     color: #E32636;
 
 }
 
+input{
+    height: 60px;
+    width: 70%;
+    border: .5px solid red;
+    border-radius: 10px;
+}
+
+.submit-btn{
+    border: none;
+    outline: none;
+    padding: 10px 5px;
+    background-color: #E32636;
+    color: white;
+    width: 20%;
+    justify-content: center;
+    border-radius: 10px;
+}
 
 /* Resposnivi nav bar */
 
