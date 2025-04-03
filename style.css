@@ -176,6 +176,7 @@ select{
     padding:3px 5px;
     font-size: 0.8rem;
     min-width: 50px;
+    margin-right: 3px;
 }
 
 .add:hover{
@@ -294,6 +295,7 @@ input{
     width: 70%;
     border: .5px solid red;
     border-radius: 10px;
+    text-align: center;
 }
 
 .submit-btn{
@@ -304,6 +306,12 @@ input{
     color: white;
     width: 25%;
     border-radius: 10px;
+}
+
+.submit-btn:hover{
+font-size: 1.2rem;
+background-color: #AA0000;
+transition: 0.3s ease-in-out;
 }
 
 .mail{
@@ -364,3 +372,29 @@ input{
         display: block;
     }
 } 
+
+.last-footer{
+    background-color: #FEDF87;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 2rem;
+    padding: 15px;
+    color:#E32636;
+}
+
+.last-footer div:hover{
+    color: #AA0000;
+    font-size: 2.5rem;
+    transition: .3s ease-in-out;
+}
+
+.copy{
+    background-color: #FEDF87;
+    display: flex;
+    font-size: 1.2rem;
+    color: #E32636;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    text-align: center;
+}
