@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        .table-container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ffcc00;
+            color: white;
+        }
+
+        .low-stock {
+            background-color: #ff6666;
+            color: white;
+        }
+
+        .sufficient-stock {
+            background-color: #ffcc00;
+            color: black;
+        }
+
+        .out-of-stock {
+            background-color: #ff0000;
+            color: white;
+        }
+
+        .product-details {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h2>Product Inventory with Stock Details</h2>
+        <table id="inventory-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Stock Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Table data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to fetch data from a given API
+        async function fetchData(apiUrl) {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                console.log('API Response:', data); // Add logging to check the API response
+                return data || [];  // Return empty array if no data or response is invalid
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+                return [];
+            }
+        }
+
+        // Function to render the table after fetching data
+        async function renderTable() {
+            const oils = await fetchData('http://localhost:8080/api/v1/oils/getall');
+            const rice = await fetchData('http://localhost:8080/api/v1/rice/getall');
+            const spices = await fetchData('http://localhost:8080/api/v1/spices/getall');
+
+            const allProducts = [...oils, ...rice, ...spices];
+
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = ''; // Clear previous data
+
+            if (allProducts.length === 0) {
+                tableBody.innerHTML = "<tr><td colspan='4'>No products found</td></tr>";
+                return;
+            }
+
+            // Loop through each product and create rows dynamically
+            allProducts.forEach(product => {
+                const row = document.createElement('tr');
+
+                // If the product does not have a valid stock quantity or name, skip it
+                if (!product.name || product.stockQuantity === undefined) return;
+
+                // Check stock and classify the stock status
+                let stockStatus = 'sufficient-stock'; // Default to sufficient stock
+                if (product.stockQuantity === 0) {
+                    stockStatus = 'out-of-stock'; // Out of stock
+                } else if (product.stockQuantity <= 10) {
+                    stockStatus = 'low-stock'; // Low stock (<= 10)
+                }
+
+                // Log the product data to check what's being fetched and categorized
+                console.log(`Product: ${product.name}, Stock: ${product.stockQuantity}, Status: ${stockStatus}`);
+
+                row.innerHTML = `
+                    <td class="product-details">${product.name || 'N/A'}</td>
+                    <td class="product-details">${product.category || 'N/A'}</td>
+                    <td class="product-details">${product.stockQuantity || 0}</td>
+                    <td class="${stockStatus}">${stockStatus.replace('-', ' ').toUpperCase()}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        renderTable(); // Call to render the table when the page loads
+    </script>
+</body>
+</html>

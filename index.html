@@ -20,10 +20,10 @@
         <div class="nav-logo"></div>
         <div class="nav-containt">
           <a href="">Home</a>
-          <a href="">Category</a>
+          <a href="./html files/category.html" target="_blank">Category</a>
           <a href="">Orders</a>
           <a href="">Inventory</a>
-          <a href="">Shortage</a>
+          <a href="./html files/shortage.html" target="_blank">Shortage</a>
 
           <button class="Log-in" onclick="signIn()">Log in</button>
           <button class="sign-up" onclick="openSignUp()">Sign up</button>
@@ -33,12 +33,12 @@
           <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
           <div class="res-containt" id="navMenu">
               <a href="#">Home</a>
-              <a href="#">Category</a>
+              <a href="./html files/category.html" target="_blank">Category</a>
               <a href="#">Orders</a>
               <a href="#">Inventory</a>
-              <a href="#">Shortage</a>
-              <button class="Log-in">Log in</button>
-              <button class="sign-up">Sign up</button>
+              <a href="./html files/shortage.html" target="_blank">Shortage</a>
+              <button class="Log-in" onclick="signIn()">Log in</button>
+              <button class="sign-up" onclick="openSignUp()">Sign up</button>
         </div>
       </div>
      
@@ -48,12 +48,14 @@
 
     <div class="top-section">
       <div class="search-box">
-        <input type="text " placeholder="Search Products" />
-        <button class="search-button">
+        <input type="text" id="searchInput" placeholder="Search Products" />
+        <button class="search-button" onclick="searchProductByName()">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
     </div>
+    
+    
 
     <!-- middle section -->
     <hr class="hr-middle" />
@@ -67,8 +69,8 @@
             <option value="http://127.0.0.1:5501/html%20files/rice.html">
               Rice
             </option>
-            <option value="">Spices</option>
-            <option value="">Oils</option>
+            <option value="./html files/spices.html">Spices</option>
+            <option value="./html files/oils.html">Oils</option>
             <option value="">Dairy&Products</option>
             <option value="">Flours</option>
             <option value="">Dry Fruits & Nuts</option>
@@ -104,7 +106,7 @@
             style="background-image: url('./images/spices.jpeg')"
             class="img-height"
           ></div>
-          <button><a href="">See All</a></button>
+          <button><a href="./html files/spices.html" target="_blank">See All</a></button>
         </div>
 
         <div class="category-items">
@@ -113,7 +115,7 @@
             style="background-image: url('./images/oils.jpeg')"
             class="img-height"
           ></div>
-          <button><a href="">See All</a></button>
+          <button><a href="./html files/oils.html" target="_blank">See All</a></button>
         </div>
 
         <div class="category-items">
@@ -241,5 +243,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="./script.js"></script>
+
   </body>
 </html>

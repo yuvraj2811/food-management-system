@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oils Products</title>
+    <style>
+        body {
+            background-color: yellow;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        th, td {
+            border: 2px solid red;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: red;
+            color: white;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        button:hover {
+            font-size: 1.2rem;
+            transition: 0.5s ease-in-out;
+        }
+        .increase { background-color: green; color: white; }
+        .decrease { background-color: orange; color: white; }
+        .delete { background-color: red; color: white; }
+        .edit { background-color: blue; color: white; }
+        .add { background-color: purple; color: white; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Oils Products List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Weight (g)</th>
+                <th>Price (₹)</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="oilsTableBody"></tbody>
+    </table>
+    <button class="add" onclick="addNewItem()">Add New Item</button>
+
+    <script>
+        async function fetchOilData() {
+            try {
+                const response = await fetch("http://localhost:8080/api/v1/oils/getall");
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const data = await response.json();
+                const tableBody = document.getElementById("oilsTableBody");
+                tableBody.innerHTML = "";
+
+                data.forEach(oil => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${oil.id}</td>
+                        <td id="name-${oil.id}">${oil.productName}</td>
+                        <td id="weight-${oil.id}">${oil.productWeight}</td>
+                        <td id="price-${oil.id}">${oil.productPrice}</td>
+                        <td id="quantity-${oil.id}">${oil.productQuantity}</td>
+                        <td id="expiry-${oil.id}">${oil.expiryDate}</td>
+                        <td>
+                            <button class="increase" onclick="updateQuantity('${oil.id}', 1)">+</button>
+                            <button class="decrease" onclick="updateQuantity('${oil.id}', -1)">-</button>
+                            <button class="edit" onclick="editItem('${oil.id}')">Edit</button>
+                            <button class="delete" onclick="deleteItem('${oil.id}')">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Error fetching oils data:", error);
+            }
+        }
+
+        async function updateQuantity(id, change) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/v1/oils/getbyid/${id}`);
+                const product = await response.json();
+                const newQuantity = product.productQuantity + change;
+                if (newQuantity < 0) return;
+
+                const updateUrl = `http://localhost:8080/api/v1/oils/updatebyid/${id}`;
+                const updatedProduct = { ...product, productQuantity: newQuantity };
+
+                const res = await fetch(updateUrl, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(updatedProduct)
+                });
+                if (!res.ok) throw new Error("Failed to update quantity");
+                fetchOilData();
+            } catch (error) {
+                console.error("Error updating quantity:", error);
+            }
+        }
+
+        async function deleteItem(id) {
+            if (!confirm("Are you sure you want to delete this item?")) return;
+            try {
+                const res = await fetch(`http://localhost:8080/api/v1/oils/deletebyid?id=${id}`, { method: "DELETE" });
+                if (!res.ok) throw new Error("Failed to delete item");
+                fetchOilData();
+            } catch (error) {
+                console.error("Error deleting item:", error);
+            }
+        }
+
+        async function editItem(id) {
+            const name = prompt("Enter new product name:");
+            const weight = prompt("Enter new product weight:");
+            const price = prompt("Enter new product price:");
+            const quantity = prompt("Enter new product quantity:");
+            const expiry = prompt("Enter new expiry date (YYYY-MM-DD):");
+            if (!name || !weight || !price || !quantity || !expiry) return;
+
+            const updatedProduct = {
+                id,
+                productName: name,
+                productWeight: parseInt(weight),
+                productPrice: parseFloat(price),
+                productQuantity: parseInt(quantity),
+                expiryDate: expiry
+            };
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/v1/oils/updatebyid/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(updatedProduct)
+                });
+                if (!response.ok) throw new Error("Failed to update item");
+                fetchOilData();
+            } catch (error) {
+                console.error("Error updating item:", error);
+            }
+        }
+
+        async function addNewItem() {
+            const id = prompt("Enter product ID:");
+            const name = prompt("Enter product name:");
+            const weight = prompt("Enter product weight:");
+            const price = prompt("Enter product price:");
+            const quantity = prompt("Enter product quantity:");
+            const expiry = prompt("Enter expiry date (YYYY-MM-DD):");
+            if (!id || !name || !weight || !price || !quantity || !expiry) return;
+
+            const newProduct = {
+                id,
+                productName: name,
+                productWeight: parseInt(weight),
+                productPrice: parseFloat(price),
+                productQuantity: parseInt(quantity),
+                expiryDate: expiry
+            };
+
+            try {
+                const response = await fetch("http://localhost:8080/api/v1/oils", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newProduct)
+                });
+                if (!response.ok) throw new Error("Failed to add item");
+                fetchOilData();
+            } catch (error) {
+                console.error("Error adding item:", error);
+            }
+        }
+
+        fetchOilData();
+    </script>
+</body>
+</html>
