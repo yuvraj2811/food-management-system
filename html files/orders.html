@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Orders Table</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[url('../images/orderbackground.jpg')] bg-cover  min-h-screen p-6 flex flex-col items-center">
+
+  <h1 class="text-3xl text-white font-bold mb-6">Orders List</h1>
+
+  <table class="table-auto w-full max-w-6xl bg-white shadow-md rounded-lg mb-4">
+    <thead class="bg-red-500 text-white">
+      <tr>
+        <th class="px-4 py-2">ID</th>
+        <th class="px-4 py-2">Product Name</th>
+        <th class="px-4 py-2">Weight (g)</th>
+        <th class="px-4 py-2">Price ($)</th>
+        <th class="px-4 py-2">Quantity</th>
+        <th class="px-4 py-2">Expiry Date</th>
+        <th class="px-4 py-2">Action</th>
+      </tr>
+    </thead>
+    <tbody id="ordersBody">
+      <!-- Data loads here -->
+    </tbody>
+  </table>
+
+  <button id="addOrderBtn" class="bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+    ➕ Add New Order
+  </button>
+
+  <script>
+    const GET_API = 'http://localhost:8080/api/v1/orders/getall';
+    const POST_API = 'http://localhost:8080/api/v1/orders';
+    const DELETE_API = 'http://localhost:8080/api/v1/orders/deletbyid';
+
+    async function fetchOrders() {
+      try {
+        const response = await fetch(GET_API);
+        const orders = await response.json();
+        const tbody = document.getElementById('ordersBody');
+        tbody.innerHTML = '';
+
+        orders.forEach(order => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="border px-4 py-2">${order.id}</td>
+            <td class="border px-4 py-2">${order.productName}</td>
+            <td class="border px-4 py-2">${(order.productWeight / 1000).toLocaleString()} g</td>
+            <td class="border px-4 py-2">$${order.productPrice.toFixed(2)}</td>
+            <td class="border px-4 py-2">${order.productQuantity}</td>
+            <td class="border px-4 py-2">${order.expiryDate}</td>
+            <td class="border px-4 py-2 text-center">
+              <button onclick="deleteOrder('${order.id}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">
+                Delete
+              </button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        alert('Failed to fetch data');
+        console.error(err);
+      }
+    }
+
+    async function deleteOrder(id) {
+      try {
+        await fetch(`${DELETE_API}?id=${id}`, {
+          method: 'DELETE'
+        });
+        fetchOrders();
+      } catch (err) {
+        alert('Failed to delete order');
+        console.error(err);
+      }
+    }
+
+    async function addOrder() {
+      const id = prompt("Enter order ID:");
+      if (!id) return;
+
+      const productName = prompt("Enter product name:");
+      if (!productName) return;
+
+      const productWeight = parseInt(prompt("Enter product weight (in grams):"), 10);
+      const productPrice = parseFloat(prompt("Enter product price:"));
+      const productQuantity = parseInt(prompt("Enter product quantity:"), 10);
+      const expiryDate = prompt("Enter expiry date (YYYY-MM-DD):");
+
+      if (!productWeight || !productPrice || !productQuantity || !expiryDate) {
+        alert("Invalid input.");
+        return;
+      }
+
+      const newOrder = {
+        id, // Added the ID
+        productName,
+        productWeight,
+        productPrice,
+        productQuantity,
+        expiryDate
+      };
+
+      try {
+        const response = await fetch(POST_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newOrder)
+        });
+
+        if (response.ok) {
+          fetchOrders();  // Refresh orders after adding new one
+        } else {
+          alert('Failed to add new order');
+        }
+      } catch (err) {
+        alert('Error while adding order');
+        console.error(err);
+      }
+    }
+
+    document.getElementById('addOrderBtn').addEventListener('click', addOrder);
+
+    // Initial load
+    fetchOrders();
+  </script>
+</body>
+</html>
